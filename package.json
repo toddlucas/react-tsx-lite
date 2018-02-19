@@ -1,0 +1,40 @@
+{
+  "name": "react-tsx-lite",
+  "version": "0.1.0",
+  "description": "Simple React TypeScript Starter Project",
+  "license": "MIT",
+  "author": {
+    "name": "Todd Lucas",
+    "email": "tl@toddlucas.net"
+  },
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/toddlucas/react-tsx-lite.git"
+  },
+  "bugs": {
+    "url": "https://github.com/toddlucas/react-tsx-lite/issues"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^4.16.2",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^16.0.36",
+    "@types/react-dom": "^16.0.3",
+    "browserify": "^16.0.0",
+    "gulp": "^3.9.1",
+    "gulp-tslint": "^8.1.2",
+    "tsify": "^3.0.4",
+    "tslint": "^5.9.1",
+    "tslint-react": "^3.4.0",
+    "typescript": "^2.7.1",
+    "vinyl-source-stream": "^2.0.0",
+    "watchify": "^3.10.0"
+  }
+}
