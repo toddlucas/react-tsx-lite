@@ -40,19 +40,16 @@ gulp.task("vendor", function () {
         browse.require(lib);
     });
 
-    browse
+    return browse
         .bundle()
         .pipe(source("vendor.js"))
         .pipe(gulp.dest(paths.output.dist));
 });
 
-gulp.task("app", ["lint"], function () {
+gulp.task("app", function () {
     return browserify({
-            basedir: ".",
             debug: true,
             entries: paths.entries,
-            cache: {},
-            packageCache: {}
         })
         .plugin(tsify)
         .external(paths.vendors)
@@ -71,14 +68,12 @@ gulp.task("styles", function () {
         .pipe(gulp.dest(paths.output.styles));
 });
 
-gulp.task("build", ["app", "vendor"], function () {
+gulp.task("build", gulp.parallel(gulp.series("lint", "app"), "vendor"));
+
+gulp.task("watch", function() {
+    gulp.watch(paths.ts, gulp.series("lint", "app"));
+    gulp.watch(paths.html, gulp.series("html"));
+    gulp.watch(paths.styles, gulp.series("styles"));
 });
 
-gulp.task("watch", ["default"], function() {
-    gulp.watch(paths.ts, ["app"]);
-    gulp.watch(paths.html, ["html"]);
-    gulp.watch(paths.styles, ["styles"]);
-});
-
-gulp.task("default", ["build", "html", "styles"], function() {
-});
+gulp.task("default", gulp.parallel("build", "html", "styles"));

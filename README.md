@@ -67,3 +67,10 @@ Start the local server using `npm` or `node`.
 ```
 
 Then open a browser and navigate to http://localhost:3000 to view.
+## Related
+
+A more complete starter project can be found at [react-tsx-starter](https://github.com/toddlucas/react-tsx-starter).
+
+## License
+
+[MIT](https://github.com/toddlucas/react-tsx-lite/blob/master/LICENSE)
