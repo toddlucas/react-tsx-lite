@@ -60,13 +60,24 @@ Gulp will automatically rebuild when a source file changes.
 
 ## Running
 
-Start the local server using `npm` or `node`.
+Start a local [Express](https://expressjs.com/) server using `npm` or `node`.
 
 ```
 > npm start
 ```
 
 Then open a browser and navigate to http://localhost:3000 to view.
+
+## Reloading
+
+You can also run the server with automatic reloading using [BrowserSync](https://www.browsersync.io/).
+
+```
+> gulp serve
+```
+
+This combines features of running a node Express server and using gulp watch.
+
 ## Related
 
 A more complete starter project can be found at [react-tsx-starter](https://github.com/toddlucas/react-tsx-starter).

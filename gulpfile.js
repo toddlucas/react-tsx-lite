@@ -4,6 +4,7 @@ var tsify = require("tsify");
 var tslint = require("gulp-tslint");
 var source = require("vinyl-source-stream");
 var browserify = require("browserify");
+var browserSync = require('browser-sync').create();
 
 var paths = {
     ts: [
@@ -19,6 +20,7 @@ var paths = {
     styles: ["src/styles/*.css"],
     output: {
         dist: "dist",
+        html: "dist/*.html",
         styles: "dist/styles"
     }
 };
@@ -55,7 +57,8 @@ gulp.task("app", function () {
         .external(paths.vendors)
         .bundle()
         .pipe(source("app.js"))
-        .pipe(gulp.dest(paths.output.dist));
+        .pipe(gulp.dest(paths.output.dist))
+        .pipe(browserSync.reload({ stream: true }));
 });
 
 gulp.task("html", function () {
@@ -65,7 +68,8 @@ gulp.task("html", function () {
 
 gulp.task("styles", function () {
     return gulp.src(paths.styles)
-        .pipe(gulp.dest(paths.output.styles));
+        .pipe(gulp.dest(paths.output.styles))
+        .pipe(browserSync.reload({ stream: true }));
 });
 
 gulp.task("build", gulp.parallel(gulp.series("lint", "app"), "vendor"));
@@ -74,6 +78,20 @@ gulp.task("watch", function() {
     gulp.watch(paths.ts, gulp.series("lint", "app"));
     gulp.watch(paths.html, gulp.series("html"));
     gulp.watch(paths.styles, gulp.series("styles"));
+});
+
+gulp.task('serve', function () {
+    browserSync.init({
+        server: {
+            baseDir: paths.output.dist
+        }
+    });
+
+    gulp.watch(paths.ts, gulp.series("lint", "app"));
+    gulp.watch(paths.html, gulp.series("html"));
+    gulp.watch(paths.styles, gulp.series("styles"));
+
+    gulp.watch(paths.output.html).on('change', browserSync.reload);
 });
 
 gulp.task("default", gulp.parallel("build", "html", "styles"));
